@@ -1,0 +1,60 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET time_zone = "+00:00";
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+
+CREATE DATABASE IF NOT EXISTS `rptr` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `rptr`;
+
+CREATE TABLE IF NOT EXISTS `mass` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `scan` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `target` varchar(300) CHARACTER SET latin1 NOT NULL,
+  `profile` varchar(50) NOT NULL,
+  `exec_time` time DEFAULT NULL,
+  `id_mass` int(11) DEFAULT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `targets` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `target` varchar(500) NOT NULL,
+  `bullet_day` varchar(50) DEFAULT NULL,
+  `bullet_week` varchar(50) DEFAULT NULL,
+  `bullet_month` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `tool_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_scan` int(11) NOT NULL,
+  `tool` mediumtext NOT NULL,
+  `exec_time` time NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `output` longtext CHARACTER SET latin1 NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE IF NOT EXISTS `vulnerabilities` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id_scan` int(11) NOT NULL,
+  `id_tool_log` int(11) DEFAULT NULL,
+  `id_template` int(11) NOT NULL,
+  `proof` mediumtext,
+  `timestamp` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
