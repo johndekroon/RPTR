@@ -1,0 +1,15 @@
+<bullets>
+	<bullet>
+		<execute>[plugins]ftpanon/ftpanon.sh [target]</execute>
+		<loots>
+			<loot>
+				<regex>230 Login</regex>
+				<results>
+					<result>
+						<id>3</id>
+					</result>
+				</results>			
+			</loot>
+		</loots>
+	</bullet>
+</bullets>

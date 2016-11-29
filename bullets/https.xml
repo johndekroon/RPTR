@@ -1,0 +1,208 @@
+<bullets>
+	<bullet>
+		<execute>python [plugins]jqueryCheck/jqueryCheck.py [target]</execute>
+		<loots>
+			<loot>
+				<regex> ! Fail: latest version</regex>
+				<regstate>1</regstate>
+				<results>
+					<result>
+						<id>16</id>
+					</result>
+				</results>
+			</loot>
+			<loot>
+				<regex>site uses: 1.6.3</regex>
+				<results>
+					<result>
+						<id>17</id>
+					</result>
+				</results>
+			</loot>
+			<loot>
+				<regex>site uses: 1.7.1</regex>
+				<results>
+					<result>
+						<id>18</id>
+					</result>
+				</results>
+			</loot>
+		</loots>
+	</bullet>
+	<bullet>      
+      <execute><![CDATA[[plugins]nikto/nikto.pl --h [target] -p [port] -Plugins "tests;shellshock;robots;headers;httpoptions;ms10_070;negotiate;apache_expect_xss;apacheusers;clientaccesspolicy;content_search;cookies;report_xml;fileops" -C all -F xml --ssl -output [save_path]/nikto-[port].xml; cat [save_path]/nikto-[port].xml]]></execute>
+      <loots>
+         <loot>
+            <regex><![CDATA[<item id="999957"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <!--Clickjacking-->
+                  <id>25</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="999102"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <!--XSS Header-->
+                  <id>26</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="999103"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <!--X-Content-Type-Options-->
+                  <id>27</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="((999949)|(999948)|(999947)|(999946))"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <!--Shellshock - CVE-2014-6271-->
+                  <id>28</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="999972"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <id>29</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="999973"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <id>30</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="999971"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <id>31</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="999959"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <id>32</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="999965"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <id>33</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="999974"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <id>34</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="999999"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <id>35</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="999982"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <id>36</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="(750501|750502|750503|750504|750505|750506|750507|750508)"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+                  <id>37</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="(000408|001795|001796|003127|006488|006495|006608|006615|006616|006672|007036|007037|007107)"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+               	<!--PhpMyAdmin-->
+                  <id>38</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="(750510|002989|001144|001384|003151)"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+               	<!--Phpinfo found-->
+                  <id>39</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="001406"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+               	<!--server status-->
+                  <id>40</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="(002518|002606|002635|003170|003171|003172|003173|003174|005864|006439)"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+               	<!--Squirrelmail found-->
+                  <id>42</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="006317"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+               	<!--DirectAdmin-->
+                  <id>43</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="(000367|000368|000369|000370|000371|000372|000373|000374|000375|000376|000377|000378|000379|000380|000381|000382|000383|000384|000385|000386|000396|000397|000398|000400|000401|000403|000404|000405|000408|000409|000410|000411|000412|000413|000414|000416|000417|000418|000419|000420|000421|000422|000423|000442|000443|000445|000446|000457|000458|000459|000460|000461|000462|000463|000464|000465|000466|000467|000468|000567|000675|000679|001358|001359|001360|001407|001408|001412|001472|001473|001551|001552|001553|001554|001555|002109|002110|003013|003029|003085|003120|003121|003133|003224|003225|003308|003309|003310|003311|003599|006513|006528|006529|006530|006531)"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+               	<!--Directory indexing found-->
+                  <id>44</id>
+               </result>
+            </results>
+         </loot>
+         <loot>
+            <regex><![CDATA[<item id="007018"(.|\n)*?</item>]]></regex>
+            <results>
+               <result>
+               	<!--server status, forbidden-->
+                  <id>45</id>
+               </result>
+            </results>
+         </loot>
+      </loots>
+   </bullet>
+</bullets>

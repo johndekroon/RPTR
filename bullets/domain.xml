@@ -1,0 +1,15 @@
+<bullets>
+	<bullet>
+		<execute>nmap --script=dns-zone-transfer.nse --script-args dns-zone-transfer.domain=[target] [target] -p [port]</execute>
+		<loots>
+			<loot>
+				<regex>dns-zone-transfer:(.|\n)*?Nmap done:</regex>
+				<results>
+					<result>
+						<id>46</id>
+					</result>
+				</results>			
+			</loot>
+		</loots>
+	</bullet>
+</bullets>

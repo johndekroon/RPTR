@@ -1,0 +1,508 @@
+<templates>
+	<template>
+		<id>1</id>
+		<title>Management poorten open</title>
+		<description>Er staan management poorten open. Met deze services kan de server beheert worden.</description>
+		<chance>1</chance>
+		<chance_desc>Een aanvaller moet een lek vinden in een van de services, of het wachtwoord brute-forcen</chance_desc>
+		<impact>2</impact>
+		<impact_desc>De aanvaller kan controle over de service krijgen</impact_desc>
+		<risk>1</risk>
+		<recommendation>Maak management poorten alleen vanaf het interne netwerk beschikbaar</recommendation>
+	</template>
+	<template>
+		<id>2</id>
+		<title>Onversleutelde services actief</title>
+		<description>Er zijn onversleutelde services actief</description>
+		<chance>1</chance>
+		<chance_desc>Hiervoor is een mitm vereist.</chance_desc>
+		<impact>2</impact>
+		<impact_desc>Een aanvaller kan wachtwoorden afluisteren</impact_desc>
+		<risk>1</risk>
+		<recommendation>Maak gebruik van versleutelde services</recommendation>
+	</template>
+	<template>
+		<id>3</id>
+		<title>Anonieme FTP open</title>
+		<description>Het is mogelijk om anoniem in te loggen op de server</description>
+		<chance>3</chance>
+		<chance_desc>FTP is een gebruikelijk protocol. De kans dat een aanvaller het vindt is groot</chance_desc>
+		<impact>2</impact>
+		<impact_desc>De aanvaller kan onbedoeld toegang krijgen tot vertrouwelijke gegevens.</impact_desc>
+		<risk>2</risk>
+		<recommendation>Zet FTP uit.</recommendation>
+	</template>
+	<template>
+		<id>4</id>
+		<title>Geen HTTPS beschikbaar</title>
+		<description>De server biedt geen HTTPS aan</description>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+		<recommendation>Gebruik HTTPS.</recommendation>
+	</template>
+	<template>
+		<id>5</id>
+		<title>SSL - Geen HSTS header</title>
+		<description>De server stuurt geen HSTS header mee.</description>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<risk>1</risk>
+		<impact_desc></impact_desc>
+		<recommendation>Stuur de HSTS header mee.</recommendation>
+	</template>
+	<template>
+		<id>6</id>
+		<title>SSL - Hostname matched niet met de URL naam</title>
+		<description>De server biedt een certificaat aan dat niet hoort bij de website. Browsers geven hierdoor aan dat de website onveilig is.</description>
+		<recommendation>Implementeer een valide SSL certificaat.</recommendation>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+	</template>
+	<template>
+		<id>7</id>
+		<title>SSL - Self signed certificate</title>
+		<description>De server biedt een certificaat aan dat niet ondertekend is door een Certificate Authority (CA). Als gevolg hiervan kan er niet gecontroleerd worden of de verbinding veilig is: een aanvaller kan namelijk ook een certificaat genereren en deze aanbieden tijdens een MitM-aanval. Browsers zullen bezoekers afraden om de website te bezoeken.</description>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+		<recommendation>Implementeer een valide SSL certificaat.</recommendation>
+	</template>
+	<template>
+		<id>8</id>
+		<title>SSL - Heartbleed kwetsbaarheid</title>
+		<description>De server is kwetsbaar voor de Heartbleed kwetsbaarheid (CVE-2014-0160). Gevolg hiervan is dat het geheugen uitgelezen kan worden, waardoor vertrouwelijke gegevens zoals wachtwoorden en private keys uit kunnen lekken.</description>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>3</impact>
+		<impact_desc></impact_desc>
+		<risk>3</risk>
+		<recommendation>Update de SSL library.</recommendation>
+	</template>
+	<template>
+		<id>9</id>
+		<title>SSL - CRIME kwetsbaarheid</title>
+		<description>De server is kwetsbaar voor de CRIME (Compression Ratio Info-leak Made Easy) kwetsbaarheid (CVE-2012-4929). De kwetsbaarheid zorgt ervoor dat SSL verbindingen onder bepaalde omstandigheden ontsleuteld kunnen worden.</description>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+		<recommendation>Update de SSL library.</recommendation>
+	</template>
+	<template>
+		<id>10</id>
+		<title>SSL - Certificaat verlopen</title>
+		<description>Het SSL certificaat is verlopen. Hierdoor is het certificaat niet valide en geven browsers een waarschuwing dat de site onveilig is.</description>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+		<recommendation>Vernieuw het SSL certificaat.</recommendation>
+	</template>
+	<template>
+		<id>11</id>
+		<title>SSL - Gebruik van RC4</title>
+		<description>De server biedt RC4 ciphers aan. Van het RC4 mechanisme is bekend dat het lek is: het kraken ervan duurt minuten tot uren. Voor meer informatie zie: https://www.rc4nomore.com/</description>
+		<recommendation>Schakel de RC4 mechanismes uit.</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>12</id>
+		<title>Information leakage: X-Powered-By</title>
+		<description>De server serveert een X-Powerd-By header, waaruit afgeleid kan worden welke technologie de server gebruikt. Hoewel dit niet direct misbruikbaar is, kan een aanvaller deze aanvaller deze informatie gebruiken.</description>
+		<recommendation>Stuur de X-Powered-By header niet mee.</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>13</id>
+		<title>SSL - CCS injection kwetsbaarheid</title>
+		<description>De OpenSSL library bevat een kwetsbaarheid waarbij het mogelijk is om het verkeer on-the-fly af te luisteren en te manipuleren. Meer informatie over de kwetsbaarheid, bekend onder CVE-2014-0224, is hier te vinden: ccsinjection.lepidum.co.jp</description>
+		<recommendation>Update de OpenSSL library.</recommendation>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+	</template>
+	<template>
+		<id>14</id>
+		<title>SSL - FREAK kwetsbaarheid</title>
+		<description>De server accepteert RSA_EXPORT cipher suites, waardoor gebruikers in bepaalde gevallen kwetsbaar zijn voor de FREAK aanval. Indien een bezoeker een kwetsbare browser gebruikt, kan een aanvaller de bezoeker dwingen om een onveilig encryptie algorithme te gebruiken, waardoor de aanvaller het verkeer kan onderscheppen en kan manipuleren. Meer informatie over de kwetsbaarheid, bekend onder CVE-2015-0204, is hier te vinden: freakattack.com</description>
+		<recommendation>Schakel de ondersteuning voor TLS export cipher suites uit.</recommendation>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+	</template>
+	<template>
+		<id>15</id>
+		<title>SSL - LOGJAM kwetsbaarheid</title>
+		<description>De server accepteert DHE_EXPORT (Diffie-Hellman) cipher suites, waardoor gebruikers in bepaalde gevallen kwetsbaar zijn voor de Logjam aanval. Indien een bezoeker een kwetsbare browser gebruikt, kan een aanvaller de bezoeker dwingen om een onveilig encryptie algorithme te gebruiken, waardoor de aanvaller het verkeer kan onderscheppen en kan manipuleren. De kwetsbaarheid doet denken aan de Freak aanval, alleen valt de Diffie-Hellman key exchange aan in plaats van de RSA key exchange. Meer informatie over de kwetsbaarheid, bekend onder CVE-2015-4000, is hier te vinden: weakdh.org</description>
+		<recommendation>Schakel de ondersteuning voor TLS export cipher suites uit.</recommendation>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+	</template>
+	<template>
+		<id>16</id>
+		<title>SSL - BEAST kwetsbaarheid</title>
+		<description>De server ondersteund TLS 1.0, dat kwetsbaar is voor de BEAST aanval. Met deze aanval kunnen delen van de SSL communicatie ontsleuteld worden. De server ondersteund geen hogere versie, waardoor de bezoeker gedwongen wordt de kwetsbare versie te gebruiken. Voor een succesvolle aanval moet de browser van de bezoeker ook kwetsbaar zijn. Vrijwel alle moderene browsers zijn beschermt tegen deze aanval. Meer informatie over de kwetsbaarheid, bekend onder CVE-2011-3389, is hier te vinden: community.qualys.com/blogs/securitylabs/2013/09/10/is-beast-still-a-threat</description>
+		<recommendation>Implementeer nieuwere versies van TLS, deze mitigeren het risico. Overweeg om TLS 1.0 uit te schakelen.</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>17</id>
+		<title>SSL - SSLv2 ondersteuning</title>
+		<description>De server ondersteund SSLv2, dat deprecated is. SSLv2 heeft een aantal kwetsbaarheden en ondersteund moderne beschermingen niet, waardoor het relatief eenvoudig is om het verkeer te manipuleren. Moderene browsers zullen proberen een zo goed mogelijke versleuteling op te zetten, waardoor het onwaarschijnlijk is dat bezoekers ook daadwerkelijk gebruik maken van SSLv2.</description>
+		<recommendation>Schakel SSLv2 uit.</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>18</id>
+		<title>Verouderde software - jQuery</title>
+		<description>De server serveert niet de laatste versie van jQuery.</description>
+		<recommendation>Gebruik de laatste versie van jQuery en implementeer een procedure om libries up-to-date te houden.</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>19</id>
+		<title>Kwetsbare jQuery 1.6.3 versie</title>
+		<description>De server serveert een kwetsbare versie van jQuery. Deze versie is kwetsbaar voor XSS. Meer informatie: https://web.nvd.nist.gov/view/vuln/detail?vulnId=CVE-2011-4969</description>
+		<recommendation>Gebruik de laatste versie van jQuery en implementeer een procedure om libries up-to-date te houden.</recommendation>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+	</template>
+	<template>
+		<id>20</id>
+		<title>Kwetsbare jQuery 1.7.1 versie</title>
+		<description>De server serveert een kwetsbare versie van jQuery. In deze versie kan er onder bepaalde omstandigheden HTML en/of script geïnjecteerd worden. Meer informatie: https://bugs.jquery.com/ticket/11290</description>
+		<recommendation>Gebruik de laatste versie van jQuery en implementeer een procedure om libries up-to-date te houden.</recommendation>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+	</template>
+	<template>
+		<id>21</id>
+		<title>Malware gedetecteerd op domein</title>
+		<description>Virustotal heeft malware gedetecteerd op het domein.</description>
+		<recommendation>Neem contact op met de virusscanners die het domein geblacklist hebben wanneer de malware verwijderd is.</recommendation>
+		<chance>3</chance>
+		<chance_desc></chance_desc>
+		<impact>3</impact>
+		<impact_desc></impact_desc>
+		<risk>3</risk>
+	</template>
+	<template>
+		<id>23</id>
+		<title>Domain transfer is niet gelocked</title>
+		<description>De domainTransferStatus voor dit domein is niet locked/prohibited. Het instellen hiervan voorkomt onbedoelde / illegale transfers.</description>
+		<recommendation>Zet de DomainTransferStatus op locked/prohibited.</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>24</id>
+		<title>DNSSEC uitgeschakeld</title>
+		<description>DNSSEC is uitgeschakeld.</description>
+		<recommendation>Zet DNSSEC aan.</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>25</id>
+		<title>Clickjacking</title>
+		<description>The anti-clickjacking X-Frame-Options header is not present.</description>
+		<recommendation>Add X-Frame-Options</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>26</id>
+		<title>X-XSS-Protection Header</title>
+		<description>The XSS Protection header is not present</description>
+		<recommendation>Add the header</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>27</id>
+		<title>X-Content-Type-Options</title>
+		<description>The X-Content-Type-Options is not set</description>
+		<recommendation>Add the header</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>28</id>
+		<title>Shellshock (CVE-2014-6271)</title>
+		<description>Vulnerable for shellshock (CVE-2014-6271)</description>
+		<recommendation>Update de software</recommendation>
+		<chance>3</chance>
+		<chance_desc></chance_desc>
+		<impact>3</impact>
+		<impact_desc></impact_desc>
+		<risk>3</risk>
+	</template>
+	<template>
+		<id>29</id>
+		<title>DEBUG HTTP verb</title>
+        <description>DEBUG HTTP verb may show server debugging information. See http://msdn.microsoft.com/en-us/library/e8z01xdh%28VS.80%29.aspx for details.</description>
+		<recommendation>Disable it</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>30</id>
+		<title>PROPFIND HTTP verb</title>
+        <description>PROPFIND HTTP verb may show the server's internal IP address: $ipfound</description>
+		<recommendation>Disable it</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>31</id>
+		<title>HTTP TRACE method</title>
+        <description>HTTP $method method is active, suggesting the host is vulnerable to XST</description>
+		<recommendation>Disable it</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>32</id>
+		<title>Server is vulnerable for MS10-070</title>
+        <description>Server is vulnerable to MS10-070 allowing a cryptographic padding oracle and leaking information</description>
+		<recommendation>Disable it</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>33</id>
+		<title>Apache MultiViews enabled</title>
+        <description>"Apache mod_negotiation is enabled with MultiViews, which allows attackers to easily brute force file names. See http://www.wisec.it/sectou.php?id=4698ebdc59d15. The following alternatives for 'index' were found:</description>
+		<recommendation>Disable it</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>34</id>
+		<title>Apache Expect XSS</title>
+        <description>Apache is vulnerable to XSS via the Expect header (CVE-2006-3918)</description>
+		<recommendation>Disable it</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>35</id>
+		<title>Apache user enum</title>
+        <description>Enumeration of users is possible by requesting ~username (responds with 'Forbidden' for users, 'not found' for non-existent users).</description>
+		<recommendation>Disable it</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>36</id>
+		<title>clientaccesspolicy / crossdomain file with wildcard</title>
+        <description>File contains a full wildcard entry</description>
+		<recommendation>Disable it</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>37</id>
+		<title>Information disclosure in error messages</title>
+        <description>Potential sensitive data from technical error messages.</description>
+		<recommendation>Disable it</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>38</id>
+		<title>phpMyAdmin gevonden</title>
+        <description>phpMyAdmin is gevonden</description>
+		<recommendation>Disable it</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>39</id>
+		<title>Phpinfo() gevonden</title>
+		<description>phpinfo is gevonden</description>
+		<recommendation>Disable it</recommendation>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+	</template>
+	<template>
+		<id>40</id>
+		<title>Information disclosure - Apache server status</title>
+		<description>Server status leaks sensitive information which can be used for used.</description>
+		<recommendation>Disable or restrict it by commenting out appropriate line in the Apache conf file or restrict access to allowed sources.</recommendation>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+	</template>
+	<template>
+		<id>41</id>
+		<title>Remote login possible on MySQL</title>
+		<description>It's possible to login remotely on the database via the MySQL service.</description>
+		<recommendation>Restrict database access on IP, or disable remote logins at all.</recommendation>
+		<chance>2</chance>
+		<chance_desc>An attacker might try to brute force the password, or try to login if he's able to steal the credentials</chance_desc>
+		<impact>2</impact>
+		<impact_desc>An attacker might be able to access confidential data.</impact_desc>
+		<risk>2</risk>
+	</template>
+	<template>
+		<id>42</id>
+		<title>SquirrelMail found on server</title>
+		<description>The webserver contains a SquirrelMail install.</description>
+		<recommendation>Seperate concerns for a server.</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>43</id>
+		<title>DirectAdmin found</title>
+		<description>The webserver contains a DirectAdmin install. If an attacker gains access to it, he might be able to gain full access to the server</description>
+		<recommendation>Restrict access to DirectAdmin.</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>3</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+	</template>
+	<template>
+		<id>44</id>
+		<title>Directory indexing found</title>
+		<description>The webserver all content to a certain folder. If this folder contains sensitive information, an attacker might be able to obtain it. </description>
+		<recommendation>Disable directory listing.</recommendation>
+		<chance>2</chance>
+		<chance_desc>This kind of vulnerability is easy to spot.</chance_desc>
+		<impact>2</impact>
+		<impact_desc>It's only a problem if the folder contains sensitive information</impact_desc>
+		<risk>2</risk>
+	</template>
+	<template>
+		<id>45</id>
+		<title>Information disclosure - Apache server status</title>
+		<description>Server status interface is found, but it was'nt possible to obtain any data, because it was not allowed by the server.</description>
+		<recommendation>Respond with a 404 instead of a 403</recommendation>
+		<chance>1</chance>
+		<chance_desc></chance_desc>
+		<impact>1</impact>
+		<impact_desc></impact_desc>
+		<risk>1</risk>
+	</template>
+	<template>
+		<id>46</id>
+		<title>DNS zone transfer enabled</title>
+		<description>DNS zone transfer is enabled. This can lead to disclosure of hidden services.</description>
+		<recommendation>Disable DNS zone transfer</recommendation>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+	</template>
+		<template>
+		<id>47</id>
+		<title>SSL - POODLE kwetsbaarheid</title>
+		<description>De server is kwetsbaar voor de POODLE kwetsbaarheid (CVE-2014-3566). De kwetsbaarheid zorgt ervoor dat SSL verbindingen onder bepaalde omstandigheden ontsleuteld kunnen worden.</description>
+		<chance>2</chance>
+		<chance_desc></chance_desc>
+		<impact>2</impact>
+		<impact_desc></impact_desc>
+		<risk>2</risk>
+		<recommendation>Schakel SSLv3 uit.</recommendation>
+	</template>
+</templates>

@@ -1,0 +1,17 @@
+<bullets>   
+<bullet>
+      <execute><![CDATA[nmap [target] -p80 --script http-svn --script-args http-svn.foldercount=15]]></execute>
+      <loots>
+         <loot>
+            <regex><![CDATA[http-svn:(.|\n)*?SVN repository found!(.|\n)*?[\n][^/|]]]></regex>
+            <results>
+               <result>
+                  <id>501</id>
+                  <title>Information disclosure - Git repository found</title>
+                  <description>The repository can leak sensitve data about the code etc.</description>
+               </result>
+            </results>
+         </loot>
+      </loots>
+   </bullet>
+</bullets>

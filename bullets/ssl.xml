@@ -1,0 +1,127 @@
+<bullets>
+	<bullet>
+		<execute>sslyze [target] --http_headers --certinfo_basic</execute>
+		<loots>
+			<loot>
+				<regex>Server did not send an HSTS header.</regex>
+				<results>
+					<result>
+						<id>5</id>
+						<description>De server stuurt geen HSTS header mee.</description>
+					</result>
+				</results>
+			</loot>
+			<loot>
+				<regex>Hostname Validation: +FAILED - Certificate does NOT match</regex>
+				<results>
+					<result>
+						<id>6</id>
+						<description>De server biedt een certificaat aan dat niet hoort bij de website. Browsers geven hierdoor aan dat de website onveilig is.</description>
+					</result>
+				</results>			
+			</loot>
+			<loot>
+				<regex>FAILED - Certificate is NOT Trusted: self signed certificate</regex>
+				<results>
+					<result>
+						<id>7</id>
+						<description>De server biedt een certificaat aan dat niet ondertekend is door een Certificate Authority (CA). Als gevolg hiervan kan er niet gecontroleerd worden of de verbinding veilig is: een aanvaller kan namelijk ook een certificaat genereren en deze aanbieden tijdens een MitM-aanval. Browsers zullen bezoekers afraden om de website te bezoeken.</description>
+					</result>
+				</results>
+			</loot>
+		</loots>
+	</bullet>
+	<bullet>
+		<execute>[plugins]/testssl.sh/testssl.sh --color 0 --quiet -U -H -S -p [target]</execute>
+		<loots>
+			<loot>
+				<regex>POODLE, SSL \(CVE-2014-3566\) +VULNERABLE \(NOT ok\)</regex>
+				<results>
+					<result>
+						<id>47</id>
+					</result>
+				</results>			
+			</loot>
+			<loot>
+				<regex>Heartbleed \(CVE-2014-0160\) +VULNERABLE</regex>
+				<results>
+					<result>
+						<id>8</id>
+					</result>
+				</results>			
+			</loot>
+			<loot>
+				<regex>CRIME, TLS \(CVE-2012-4929\) +VULNERABLE</regex>
+				<results>
+					<result>
+						<id>9</id>
+					</result>
+				</results>			
+			</loot>
+			<loot>
+				<regex>Certificate Expiration +expired!</regex>
+				<results>
+					<result>
+						<id>10</id>
+					</result>
+				</results>			
+			</loot>
+			<loot>
+				<regex>RC4 \(CVE-2013-2566, CVE-2015-2808\) +VULNERABLE</regex>
+				<results>
+					<result>
+						<id>11</id>
+					</result>
+				</results>			
+			</loot>
+			<loot>
+				<regex>Application banner +X-Powered-By</regex>
+				<results>
+					<result>
+						<id>12</id>
+					</result>
+				</results>			
+			</loot>
+			<loot>
+				<regex>CCS \(CVE-2014-0224\) +VULNERABLE</regex>
+				<results>
+					<result>
+						<id>13</id>
+					</result>
+				</results>			
+			</loot>
+			<loot>
+				<regex>FREAK \(CVE-2015-0204\) +VULNERABLE</regex>
+				<results>
+					<result>
+						<id>14</id>
+					</result>
+				</results>			
+			</loot>
+			<loot>
+				<regex>LOGJAM \(CVE-2015-4000\)[a-z, ]+VULNERABLE</regex>
+				<results>
+					<result>
+						<id>15</id>
+					</result>
+				</results>			
+			</loot>
+			<loot>
+				<regex>VULNERABLE (NOT ok) -- and no higher protocols as mitigation supported</regex>
+				<results>
+					<result>
+						<id>16</id>
+					</result>
+				</results>			
+			</loot>
+			<loot>
+				<regex>SSLv2 +offered</regex>
+				<results>
+					<result>
+						<id>17</id>
+					</result>
+				</results>			 
+			</loot>
+		</loots>
+	</bullet>
+</bullets>

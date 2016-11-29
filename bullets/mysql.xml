@@ -1,0 +1,15 @@
+<bullets>
+	<bullet>
+		<execute>nmap -p 3306 --script mysql-info [target]</execute>
+		<loots>
+			<loot>
+				<regex>3306(.|\n)*?Connect with DB*</regex>
+                <results>
+                	<result>
+                		<id>41</id>
+					</result>
+                </results>
+			</loot>
+		</loots>
+	</bullet>
+</bullets>

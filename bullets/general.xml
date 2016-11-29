@@ -1,0 +1,31 @@
+<bullets>
+	<bullet>
+			<execute>python [plugins]/domaincheck.py [target]</execute>
+			<loots>
+				<loot>
+					<regex>^DNSSEC ENABLED: False.*</regex>
+					<results>
+						<result>
+							<id>24</id>
+						</result>
+					</results>
+				</loot>
+				<loot>
+					<regex>^TRANSFER STATUS LOCKED: False.*</regex>
+					<results>
+						<result>
+							<id>23</id>
+						</result>
+					</results>
+				</loot>
+				<loot>
+					<regex>^Malware detected on URL.*</regex>
+					<results>
+						<result>
+							<id>21</id>
+						</result>
+					</results>
+				</loot>
+			</loots>
+		</bullet>
+</bullets>
