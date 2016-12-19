@@ -53,26 +53,29 @@ args = parser.parse_args()
 targetUrl = args.URL
 ssl = args.ssl
 
-if ssl:
-	response = urllib2.urlopen('https://'+targetUrl)
-else:
-	response = urllib2.urlopen('http://'+targetUrl)
-for line in response.readlines():
-	if ("jquery" in line) and ".js" in line:
-		#Y U NO USING REGEX?!
-		jqueryUrl = line.replace('"', "")
-		jqueryUrl = jqueryUrl.replace("'", "")
-		split = jqueryUrl.split('src=', 1)
-		jqueryUrl = split[1]
-		split = jqueryUrl.split('.js', 1)
-		jqueryUrl = split[0]+".js"
-		print jqueryUrl
-		if("http://" in jqueryUrl) or ("https://" in jqueryUrl):
-			jqueryUrl = jqueryUrl
-		if("//" in jqueryUrl[0:2]):
-			jqueryUrl = "http:"+jqueryUrl
-		else:
-			jqueryUrl = 'http://'+targetUrl+'/'+jqueryUrl
-		jqueryFile = urllib2.urlopen(jqueryUrl).read(60)
-		#print retrieveVersion(jqueryFile)
-		compareVersion(retrieveVersion(jqueryFile[0:20]))
+try:
+    if ssl:
+    	response = urllib2.urlopen('https://'+targetUrl)
+    else:
+    	response = urllib2.urlopen('http://'+targetUrl)
+    for line in response.readlines():
+    	if ("jquery" in line) and ".js" in line:
+    		#Y U NO USING REGEX?!
+    		jqueryUrl = line.replace('"', "")
+    		jqueryUrl = jqueryUrl.replace("'", "")
+    		split = jqueryUrl.split('src=', 1)
+    		jqueryUrl = split[1]
+    		split = jqueryUrl.split('.js', 1)
+    		jqueryUrl = split[0]+".js"
+    		print jqueryUrl
+    		if("http://" in jqueryUrl) or ("https://" in jqueryUrl):
+    			jqueryUrl = jqueryUrl
+    		if("//" in jqueryUrl[0:2]):
+    			jqueryUrl = "http:"+jqueryUrl
+    		else:
+    			jqueryUrl = 'http://'+targetUrl+'/'+jqueryUrl
+    		jqueryFile = urllib2.urlopen(jqueryUrl).read(60)
+    		#print retrieveVersion(jqueryFile)
+    		compareVersion(retrieveVersion(jqueryFile[0:20]))
+except:
+    print "File not available"
